@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cart</title>
+</head>
+<style>
+     #display{
+        display: grid;
+        grid-template-columns: repeat(4,20%);
+        justify-content: center;
+        grid-gap: 1%;
+        text-align: center;
+    }
+    img{
+        width: 100%;
+        height: 250px;
+    }
+    #display>div{
+        border: 1px solid black;
+        padding:1%;
+        font-size: 20px;
+    }
+</style>
+<body>
+    <h1 style="text-align: center; margin: 40px;">Items in Cart</h1>
+    <div id="total"></div> 
+    <div><input id="c" type="text" placeholder="coupon" /><button onclick="checkCoupon()">Submit</button></div>
+    <div><button onclick="payment()">Proceed to payment</button></div>
+    <div id="display"></div>
+</body>
+</html>
+<script>
+    var total = 0;
+    function add(){
+        var newCart = JSON.parse(localStorage.getItem("cart"))
+        newCart.forEach((el)=>addProduct(el))
+        updatetotal()
+
+    }
+    add()
+        function addProduct(el) {
+            var main = document.getElementById("display");
+
+            var div = document.createElement("div")
+            var name = document.createElement("div")
+            name.innerText = el.name;
+            var img = document.createElement("img")
+            img.src = el.img;
+            var price = document.createElement("div")
+            price.innerText = el.price;
+            total+= el.price;
+            var category = document.createElement("div")
+            category.innerText = el.category;
+
+            div.append(name, img, price, category)
+
+            main.append(div)
+        }
+        function checkCoupon(){
+            var str = document.getElementById("c").value;
+            if(str== "masai30"){
+                total = total*0.7
+            }
+            updatetotal()
+        }
+        function updatetotal(){
+            var t = document.getElementById("total")
+            t.innerText = "Total Payment :-  " + total;
+        }
+        function payment(){
+            localStorage.setItem("pr", total)
+            window.location.href = "checkout.html"
+        }
+</script>

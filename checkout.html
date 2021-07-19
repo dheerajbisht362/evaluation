@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div style="display:flex; flex-direction: column; width: 400px;">
+        <h1 id="head"></h1>
+        <br>
+        <input placeholder="Enter phone number" />
+        <br>
+        <input placeholder="Enter Email" />
+        <br/>
+        <input placeholder="Enter City" />
+        <br>
+        <input placeholder="Enter Location" />
+        <br>
+        <button onclick="proceed()">Place Order</button>
+    </div>
+</body>
+</html>
+<script>
+    showpage();
+        function showpage() {
+            var pay = document.getElementById("head")
+            pay.innerText = "Total Payable Amount is " + localStorage.getItem("pr")
+        }
+        function proceed(){
+            window.location.href = "payment.html"
+        }
+</script>
